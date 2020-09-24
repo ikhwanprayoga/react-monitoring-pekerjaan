@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import LayoutLogin from './login';
 import LayoutOperator from './operator';
 import LayoutSuperior from './superior';
 
@@ -24,13 +25,31 @@ class Layouts extends React.Component {
                 level: 'superior'
             })
         }
+        if (/^\/login(?=\/|$)/i.test(pathName)) {
+            this.setState({
+                level: 'auth'
+            })
+        }
     }
 
     render() { 
         const { level } = this.state
-        return (
-            level === 'operator' ? <LayoutOperator /> : <LayoutSuperior />
-        );
+        switch (level) {
+            case 'operator':
+                return (
+                    <LayoutOperator />
+                );
+            case 'operator':
+                return (
+                    <LayoutSuperior />
+                );
+            case 'auth':
+                return (
+                    <LayoutLogin />
+                );
+            default:
+                return ('')
+        }
     }
 }
  
