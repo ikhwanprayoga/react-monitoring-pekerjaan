@@ -3,10 +3,12 @@ import { BrowserRouter as RouterWeb, Route, Switch } from 'react-router-dom';
 import Login from './page/Login';
 import DashboardSuperior from './page/superior/dashboard';
 import DataSuperior from './page/superior/data';
-import DashboardOperator from './page/operator/dashboard';
 import DataOperator from './page/operator/data';
+import UploadOperator from './page/operator/upload';
 import Home from './page/home';
 import Layouts from './component/layouts';
+import ListGalery from './page/superior/data/list';
+import { Container } from 'react-bootstrap';
 
 class Router extends React.Component {
     constructor(props) {
@@ -18,14 +20,17 @@ class Router extends React.Component {
             <div>
                 <RouterWeb>
                     <Layouts />
-                    <Switch>
-                        <Route path='/' exact component={Home} />
-                        <Route path='/login' exact component={Login} />
-                        <Route path='/superior/dashboard' exact component={DashboardSuperior} />
-                        <Route path='/superior/data' exact component={DataSuperior} />
-                        <Route path='/operator/dashboard' component={DashboardOperator} />
-                        <Route path='/operator/data' component={DataOperator} /> 
-                    </Switch>
+                    <Container fluid style={{marginTop:'20px'}}>
+                        <Switch>
+                            <Route path='/' exact component={Home} />
+                            <Route path='/login' exact component={Login} />
+                            <Route path='/superior/dashboard' exact component={DashboardSuperior} />
+                            <Route path='/superior/data' exact component={DataSuperior} />
+                            <Route path='/superior/list-galery' exact component={ListGalery} />
+                            <Route path='/operator/upload' component={UploadOperator} />
+                            <Route path='/operator/data' component={DataOperator} /> 
+                        </Switch>
+                    </Container>
                 </RouterWeb>
             </div>
         );

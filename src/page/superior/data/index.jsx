@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import CardData from '../../../component/cardData'
 
 class Data extends React.Component {
@@ -12,10 +13,20 @@ class Data extends React.Component {
             <Container fluid className="mt-4">
                 <Row>
                     <Col>
+                        <Link to="/superior/list-galery" >
+                            <CardData 
+                                title="judul kami disini maka inilah" 
+                                description="Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together" 
+                                image="https://picsum.photos/200/150"
+                                date="13 Oktober 2020" 
+                            />
+                        </Link>
+                    </Col>
+                    <Col>
                         <CardData 
-                            title="judul kami disini maka inilah" 
+                            title="judul" 
                             description="Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together" 
-                            image="https://picsum.photos/200"
+                            image="https://picsum.photos/200/150"
                             date="13 Oktober 2020" 
                         />
                     </Col>
@@ -23,7 +34,7 @@ class Data extends React.Component {
                         <CardData 
                             title="judul" 
                             description="Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together" 
-                            image="https://picsum.photos/200"
+                            image="https://picsum.photos/200/150"
                             date="13 Oktober 2020" 
                         />
                     </Col>
@@ -31,7 +42,15 @@ class Data extends React.Component {
                         <CardData 
                             title="judul" 
                             description="Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together" 
-                            image="https://picsum.photos/200"
+                            image="https://picsum.photos/200/150"
+                            date="13 Oktober 2020" 
+                        />
+                    </Col>
+                    <Col>
+                        <CardData 
+                            title="judul" 
+                            description="Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together" 
+                            image="https://picsum.photos/200/150"
                             date="13 Oktober 2020" 
                         />
                     </Col>

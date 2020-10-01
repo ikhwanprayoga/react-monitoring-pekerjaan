@@ -12,7 +12,7 @@ class CardData extends React.Component {
           return (
             <div className="card">
                   <div className="image">
-                        <img src={image} style={{width:"100%"}} />
+                        <img src={image} />
                   </div>
                   <div className="text">
                         <h3>{title.length > 15 ? `${title.substr(0, 15)}...` : title}</h3>

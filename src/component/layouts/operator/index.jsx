@@ -2,12 +2,13 @@ import React from 'react';
 import { Nav, NavItem} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faList } from '@fortawesome/free-solid-svg-icons';
+import { faUpload, faList } from '@fortawesome/free-solid-svg-icons';
+import './style.css'
 
 const tabs = [{
-    route: "/operator/dashboard",
-    icon: faHome,
-    label: "Dashboard"
+    route: "/operator/upload",
+    icon: faUpload,
+    label: "Upload"
   },{
     route: "/operator/data",
     icon: faList,
@@ -24,13 +25,13 @@ class LayoutOperator extends React.Component {
         return (
             <div>
                 {/* Top Bar*/}
-                <nav className="navbar navbar-expand-md navbar-light d-none d-lg-block sticky-top" role="navigation">
+                <nav className="navbar navbar-expand-md navbar-light d-none d-lg-block sticky-top nav-warna" role="navigation">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="/home">Brand</a>
                         <Nav className="ml-auto">
                           <NavItem>
-                            <NavLink to="/operator/dashboard" className="nav-link">
-                              Dashboard
+                            <NavLink to="/operator/upload" className="nav-link">
+                              Upload
                             </NavLink>
                           </NavItem>
                           <NavItem>
@@ -42,7 +43,7 @@ class LayoutOperator extends React.Component {
                     </div>
                 </nav>
                 {/* Bottom Tab Navigator*/}
-                <nav className="navbar fixed-bottom navbar-light d-block d-lg-none bottom-tab-nav" role="navigation">
+                <nav className="navbar fixed-bottom navbar-light d-block d-lg-none bottom-tab-nav nav-warna" role="navigation">
                     <Nav className="w-100">
                         <div className=" d-flex flex-row justify-content-around w-100">
                         {
