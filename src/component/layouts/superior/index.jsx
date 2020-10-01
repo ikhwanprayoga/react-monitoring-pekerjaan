@@ -2,7 +2,8 @@ import React from 'react';
 import { Nav, NavItem} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faHome, faUserCircle, faList } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faList } from '@fortawesome/free-solid-svg-icons';
+import './style.css'
 
 const tabs = [{
     route: "/superior/dashboard",
@@ -42,7 +43,7 @@ class LayoutSuperior extends React.Component {
                     </div>
                 </nav>
                 {/* Bottom Tab Navigator*/}
-                <nav className="navbar fixed-bottom navbar-light d-block d-lg-none bottom-tab-nav" role="navigation">
+                <nav className="navbar fixed-bottom d-block d-lg-none bottom-tab-nav nav-bawah" role="navigation">
                     <Nav className="w-100">
                         <div className=" d-flex flex-row justify-content-around w-100">
                         {

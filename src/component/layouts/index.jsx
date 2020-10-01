@@ -39,7 +39,7 @@ class Layouts extends React.Component {
                 return (
                     <LayoutOperator />
                 );
-            case 'operator':
+            case 'superior':
                 return (
                     <LayoutSuperior />
                 );
