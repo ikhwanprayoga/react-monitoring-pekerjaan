@@ -1,11 +1,11 @@
 import React from 'react'
-import { BrowserRouter as RouterWeb, Route, Switch } from 'react-router-dom'; 
+import { BrowserRouter as RouterWeb, Route, Switch, Redirect } from 'react-router-dom'; 
 import Login from './page/Login';
 import DashboardSuperior from './page/superior/dashboard';
 import DataSuperior from './page/superior/data';
 import DataOperator from './page/operator/data';
 import UploadOperator from './page/operator/upload';
-import Home from './page/home';
+// import Home from './page/home';
 import Layouts from './component/layouts';
 import ListGalery from './page/superior/data/list';
 import { Container } from 'react-bootstrap';
@@ -22,7 +22,7 @@ class Router extends React.Component {
                     <Layouts />
                     <Container fluid style={{marginTop:'20px'}}>
                         <Switch>
-                            <Route path='/' exact component={Home} />
+                            <Route path='/' exact><Redirect to="/login" /></Route>
                             <Route path='/login' exact component={Login} />
                             <Route path='/superior/dashboard' exact component={DashboardSuperior} />
                             <Route path='/superior/data' exact component={DataSuperior} />

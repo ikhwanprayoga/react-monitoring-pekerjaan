@@ -13,7 +13,7 @@ class LayoutOperator extends React.Component {
                 {/* Top Bar*/}
                 <nav className="navbar navbar-expand-md navbar-light d-none d-lg-block sticky-top" role="navigation">
                     <div className="container-fluid">
-                        <a className="navbar-brand" href="/">Brand Login</a>
+                        <a className="navbar-brand" href="/">Page Login</a>
                         <Nav className="ml-auto">
                           <NavItem>
                             <NavLink to="/login" className="nav-link">
