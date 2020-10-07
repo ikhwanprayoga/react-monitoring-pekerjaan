@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Button } from 'react-bootstrap'
-import { fetchAllActivities } from '../../services/activity'
+// import { fetchAllActivities } from '../../services/activity'
 import { login } from '../../services/user'
 
 class Login extends React.Component {
@@ -15,12 +15,20 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchActivities()
+
     }
 
-    fetchActivities = async() => {
-        const result = await fetchAllActivities()
-        console.log('res activity', result)
+    login = async () => {
+        const { userForm } = this.state 
+        const ress = await login(userForm)
+        
+        if (ress.status === 'success' && ress.level === 'superior') {
+            this.props.history.push('/superior/data')
+        } else if (ress.status === 'success' && ress.level === 'operator') {
+            this.props.history.push('/operator/data')
+        } else {
+            this.props.history.push('/login')
+        }
     }
 
     handleChangeForm = (event) => {
@@ -33,8 +41,7 @@ class Login extends React.Component {
     }
 
     render() { 
-        const {userForm} = this.state
-        console.log('userform', userForm)
+        
         return (
             <>
                 <Form>
@@ -43,7 +50,7 @@ class Login extends React.Component {
                         <Form.Control 
                             type="text" 
                             placeholder="Masukan username" 
-                            name="usrename"
+                            name="username"
                             onChange={this.handleChangeForm}
                         />
                     </Form.Group>
@@ -57,7 +64,7 @@ class Login extends React.Component {
                             onChange={this.handleChangeForm}
                         />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="button" onClick={this.login}>
                         Masuk
                     </Button>
                 </Form>

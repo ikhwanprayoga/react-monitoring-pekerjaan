@@ -2,58 +2,49 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import CardData from '../../../component/cardData'
+import { fetchAllActivities } from '../../../services/activity'
+import { dateIndo } from '../../../helpers/time'
 
 class Data extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = {
+            listActivities: []
+        }
     }
+
+    componentDidMount() {
+        this.fetchList()
+    }
+
+    fetchList = async () => {
+        const ress = await fetchAllActivities()
+        
+        if (ress) {
+            this.setState({
+                listActivities: ress.data
+            })
+        }
+    }
+
     render() { 
+        const { listActivities } = this.state
+
         return (
             <Container fluid className="mt-4">
                 <Row>
-                    <Col>
-                        <Link to="/superior/list-galery" >
-                            <CardData 
-                                title="judul kami disini maka inilah" 
-                                description="Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together" 
-                                image="https://picsum.photos/200/150"
-                                date="13 Oktober 2020" 
-                            />
-                        </Link>
-                    </Col>
-                    <Col>
-                        <CardData 
-                            title="judul" 
-                            description="Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together" 
-                            image="https://picsum.photos/200/150"
-                            date="13 Oktober 2020" 
-                        />
-                    </Col>
-                    <Col>
-                        <CardData 
-                            title="judul" 
-                            description="Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together" 
-                            image="https://picsum.photos/200/150"
-                            date="13 Oktober 2020" 
-                        />
-                    </Col>
-                    <Col>
-                        <CardData 
-                            title="judul" 
-                            description="Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together" 
-                            image="https://picsum.photos/200/150"
-                            date="13 Oktober 2020" 
-                        />
-                    </Col>
-                    <Col>
-                        <CardData 
-                            title="judul" 
-                            description="Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together" 
-                            image="https://picsum.photos/200/150"
-                            date="13 Oktober 2020" 
-                        />
-                    </Col>
+                    {listActivities.map( d => (
+                        <Col>
+                            <Link to={`/superior/list-galery/${d.id}`} >
+                                <CardData 
+                                    title={d.title} 
+                                    description={d.description} 
+                                    image="https://picsum.photos/200/150"
+                                    date={dateIndo(d.created_at)}  
+                                />
+                            </Link>
+                        </Col>
+                    ))}
                 </Row>
             </Container>
         );
