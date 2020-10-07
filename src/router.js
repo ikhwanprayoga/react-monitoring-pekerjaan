@@ -22,7 +22,9 @@ class Router extends React.Component {
                     <Layouts />
                     <Container fluid style={{marginTop:'20px'}}>
                         <Switch>
-                            <Route path='/' exact><Redirect to="/login" /></Route>
+                            <Route path='/' exact component={Home}>
+                                <Redirect to='/login' />
+                            </Route>
                             <Route path='/login' exact component={Login} />
                             <Route path='/superior/dashboard' exact component={DashboardSuperior} />
                             <Route path='/superior/data' exact component={DataSuperior} />
