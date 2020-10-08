@@ -1,5 +1,6 @@
 import React from 'react';
 import ImageGallery from 'react-image-gallery'
+import { fetchActivty } from '../../../services/activity'
 import './style.css'
 
 const images = [
@@ -22,6 +23,17 @@ class ListGalery extends React.Component {
         super(props);
         this.state = {  }
     }
+
+    componentDidMount(){
+      this.fetchActivty()
+    }
+
+    fetchActivty = async () => {
+      const { id } = this.props.match.params
+      const ress = await fetchActivty(id)
+      console.log('res activity', ress)
+    }
+
     render() { 
         return ( <ImageGallery items={images} /> );
     }

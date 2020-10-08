@@ -18,11 +18,12 @@ export async function fetchAllActivities() {
       }
 }
 
-export async function fetchActivty(payload) {
+export async function fetchActivty(id) {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/activity/${payload.id}`,
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/activity/${id}`,
           { ...AuthHeader() },
         )
+        console.log('ress service', res)
         return res.data.data
       } catch (error) {
       //   notification.warning({
