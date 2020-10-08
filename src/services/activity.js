@@ -23,13 +23,10 @@ export async function fetchActivty(id) {
         const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/activity/${id}`,
           { ...AuthHeader() },
         )
-        console.log('ress service', res)
-        return res.data.data
+        
+        return res.data
       } catch (error) {
-      //   notification.warning({
-      //     message: 'Gagal Mengambil Data',
-      //     description: error.message,
-      //   })
+          Notification.error(error.response.status, 'Gagal memuat data')
         return false
       }
 }

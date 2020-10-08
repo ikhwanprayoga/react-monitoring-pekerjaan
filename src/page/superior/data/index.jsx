@@ -34,12 +34,12 @@ class Data extends React.Component {
             <Container fluid className="mt-4">
                 <Row>
                     {listActivities.map( d => (
-                        <Col>
+                        <Col md={3} className="mb-5">
                             <Link to={`/superior/list-galery/${d.id}`} >
                                 <CardData 
                                     title={d.title} 
                                     description={d.description} 
-                                    image="https://picsum.photos/200/150"
+                                    image={d.file ? `${process.env.REACT_APP_BASE_URL_FILES}/photos/${d.file}` : `${process.env.REACT_APP_BASE_URL_FILES}/photos/no-image.png`}
                                     date={dateIndo(d.created_at)}  
                                 />
                             </Link>
