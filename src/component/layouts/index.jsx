@@ -12,28 +12,33 @@ class Layouts extends React.Component {
         }
     }
 
-    componentWillMount () {
+    getLevel = () => {
         const { location } = this.props
         const pathName = location.pathname
         if (/^\/operator(?=\/|$)/i.test(pathName)) {
-            this.setState({
-                level: 'operator'
-            })
+            // this.setState({
+            //     level: 'operator'
+            // })
+            return 'operator'
         }
         if (/^\/superior(?=\/|$)/i.test(pathName)) {
-            this.setState({
-                level: 'superior'
-            })
+            // this.setState({
+            //     level: 'superior'
+            // })
+            return 'superior'
         }
         if (/^\/login(?=\/|$)/i.test(pathName)) {
-            this.setState({
-                level: 'auth'
-            })
+            // this.setState({
+            //     level: 'auth'
+            // })
+            return 'auth'
         }
     }
 
     render() { 
-        const { level } = this.state
+        // const { level } = this.state
+        const level = this.getLevel()
+        
         switch (level) {
             case 'operator':
                 return (
