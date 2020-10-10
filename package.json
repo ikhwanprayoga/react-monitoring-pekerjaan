@@ -23,7 +23,7 @@
     "reactstrap": "^8.6.0"
   },
   "scripts": {
-    "predeploy": "yarn build",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
