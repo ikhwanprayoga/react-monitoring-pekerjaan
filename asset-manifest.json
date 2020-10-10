@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/react-monitoring-pekerjaan/static/css/main.37507891.chunk.css",
+    "main.js": "/react-monitoring-pekerjaan/static/js/main.c23dfb87.chunk.js",
+    "main.js.map": "/react-monitoring-pekerjaan/static/js/main.c23dfb87.chunk.js.map",
+    "runtime-main.js": "/react-monitoring-pekerjaan/static/js/runtime-main.91937ea8.js",
+    "runtime-main.js.map": "/react-monitoring-pekerjaan/static/js/runtime-main.91937ea8.js.map",
+    "static/css/2.f06db823.chunk.css": "/react-monitoring-pekerjaan/static/css/2.f06db823.chunk.css",
+    "static/js/2.6f889574.chunk.js": "/react-monitoring-pekerjaan/static/js/2.6f889574.chunk.js",
+    "static/js/2.6f889574.chunk.js.map": "/react-monitoring-pekerjaan/static/js/2.6f889574.chunk.js.map",
+    "index.html": "/react-monitoring-pekerjaan/index.html",
+    "precache-manifest.b5fcf1f19fb41e172e2a4978787f1c53.js": "/react-monitoring-pekerjaan/precache-manifest.b5fcf1f19fb41e172e2a4978787f1c53.js",
+    "service-worker.js": "/react-monitoring-pekerjaan/service-worker.js",
+    "static/css/2.f06db823.chunk.css.map": "/react-monitoring-pekerjaan/static/css/2.f06db823.chunk.css.map",
+    "static/css/main.37507891.chunk.css.map": "/react-monitoring-pekerjaan/static/css/main.37507891.chunk.css.map",
+    "static/js/2.6f889574.chunk.js.LICENSE.txt": "/react-monitoring-pekerjaan/static/js/2.6f889574.chunk.js.LICENSE.txt",
+    "static/media/notifications.css": "/react-monitoring-pekerjaan/static/media/notification.c0d3c94c.eot"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.91937ea8.js",
+    "static/css/2.f06db823.chunk.css",
+    "static/js/2.6f889574.chunk.js",
+    "static/css/main.37507891.chunk.css",
+    "static/js/main.c23dfb87.chunk.js"
+  ]
+}
