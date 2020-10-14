@@ -42,6 +42,7 @@ export async function postActivity(payload) {
   formData.append('description', payload.description)
   formData.append('date', payload.date)
   formData.append('user_id', payload.userId)
+  formData.append('is_work', payload.isWork)
 
   try {
     const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/activity`,

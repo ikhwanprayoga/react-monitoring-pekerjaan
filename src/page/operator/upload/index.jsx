@@ -11,7 +11,7 @@ class UploadOperator extends React.Component {
           title: '',
           date: '',
           description: '',
-          // files: ''
+          isWork: true
         },
         files: ''
       }
@@ -32,6 +32,7 @@ class UploadOperator extends React.Component {
             title: '',
             date: '',
             description: '',
+            isWork: true
           },
           files: ''
         })
@@ -55,6 +56,7 @@ class UploadOperator extends React.Component {
 
     render() { 
       const { form } = this.state
+      console.log('form', form)
       
       return (
         <>
@@ -70,6 +72,13 @@ class UploadOperator extends React.Component {
             <Form.Group>
               <Form.Label>Tanggal Pekerjaan</Form.Label>
               <Form.Control type="date" name="date" value={form.date} onChange={this.handleChangeForm} placeholder="Masukan tanggal pekerjaan" />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Apakah berkerja?</Form.Label>
+              <div onChange={this.handleChangeForm}>
+                <input type="radio" value={true} name="isWork" /> Kerja
+                <input style={{marginLeft:"15px"}} type="radio" value={false} name="isWork" /> Tidak Kerja
+              </div>
             </Form.Group>
             <Form.Group>
               <Form.Label>Foto Pekerjaan</Form.Label>
