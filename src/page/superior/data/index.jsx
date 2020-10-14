@@ -39,8 +39,8 @@ class Data extends React.Component {
                                 <CardData 
                                     title={d.title} 
                                     description={d.description} 
-                                    image={d.file ? `${process.env.REACT_APP_BASE_URL_FILES}/photos/${d.file}` : `${process.env.REACT_APP_BASE_URL_FILES}/photos/no-image.png`}
-                                    date={dateIndo(d.created_at)}  
+                                    image={d.file ? `${process.env.REACT_APP_BASE_URL_FILES}/photos/${d.file}` : `${process.env.REACT_APP_BASE_URL_FILES}/images/no-image.png`}
+                                    date={dateIndo(d.date)}  
                                 />
                             </Link>
                         </Col>
