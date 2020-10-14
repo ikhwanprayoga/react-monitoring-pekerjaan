@@ -57,7 +57,9 @@ class ListGalery extends React.Component {
             </Row>
             <Row style={{marginBottom:'6rem'}}>
               <Card>
-                <Card.Header>{dateIndo(detail.date)}</Card.Header>
+                <Card.Header>
+                  {dateIndo(detail.date)} / {detail.is_work === 'true' ? 'Bekerja' : 'Tidak Bekerja'}
+                </Card.Header>
                 <Card.Body>
                   <Card.Title>{detail.title}</Card.Title>
                   <Card.Text>

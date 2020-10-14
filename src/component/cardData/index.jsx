@@ -7,7 +7,7 @@ class CardData extends React.Component {
           this.state = {  }
       }
       render() { 
-            const { title, description, image, date } = this.props
+            const { title, description, image, date, isWork } = this.props
 
           return (
             <div className="card">
@@ -18,6 +18,7 @@ class CardData extends React.Component {
                         <h3>{title.length > 15 ? `${title.substr(0, 15)}...` : title}</h3>
                         <p>{description.length > 30 ? `${description.substr(0, 30)}...` : description}</p>
                         <p>{date}</p>
+                        <p>Ket: {isWork}</p>
                   </div>
             </div>
           );

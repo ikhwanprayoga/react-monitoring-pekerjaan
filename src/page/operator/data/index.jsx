@@ -29,7 +29,7 @@ class Data extends React.Component {
 
     render() { 
         const { listActivities } = this.state
-        
+        console.log('lisac', listActivities)
         return (
             <Container fluid className="mt-4">
                 <Row>
@@ -41,6 +41,7 @@ class Data extends React.Component {
                                     description={d.description} 
                                     image={d.file ? `${process.env.REACT_APP_BASE_URL_FILES}/photos/${d.file}` : `${process.env.REACT_APP_BASE_URL_FILES}/images/no-image.png`}
                                     date={dateIndo(d.date)}  
+                                    isWork={d.is_work === 'true' ? 'Bekerja' : 'Tidak Bekerja'}
                                 />
                             </Link>
                         </Col>
