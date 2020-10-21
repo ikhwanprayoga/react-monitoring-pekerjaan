@@ -23,7 +23,7 @@ class Login extends React.Component {
         const ress = await login(userForm)
         
         if (ress.status === 'success' && ress.level === 'superior') {
-            this.props.history.push('/superior/data')
+            this.props.history.push('/superior/project')
         } else if (ress.status === 'success' && ress.level === 'operator') {
             this.props.history.push('/operator/projects')
         } else {
