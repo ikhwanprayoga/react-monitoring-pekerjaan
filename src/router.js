@@ -3,10 +3,13 @@ import { BrowserRouter as RouterWeb, Route, Switch, Redirect } from 'react-route
 import Login from './page/Login';
 import DashboardSuperior from './page/superior/dashboard';
 import DataSuperior from './page/superior/data';
+import ListGalerySuperior from './page/superior/data/list';
+
+import ProjectOperator from './page/operator/project';
 import DataOperator from './page/operator/data';
 import UploadOperator from './page/operator/upload';
-import ListGalerySuperior from './page/superior/data/list';
 import ListGaleryOperator from './page/operator/data/list';
+
 import Home from './page/home';
 import Layouts from './component/layouts';
 import { Container } from 'react-bootstrap';
@@ -30,9 +33,12 @@ class Router extends React.Component {
                             <Route path='/superior/dashboard' exact component={DashboardSuperior} />
                             <Route path='/superior/data' exact component={DataSuperior} />
                             <Route path='/superior/list-galery/:id' exact component={ListGalerySuperior} />
-                            <Route path='/operator/upload' component={UploadOperator} />
-                            <Route path='/operator/data' component={DataOperator} /> 
+
+
+                            <Route path='/operator/projects' component={ProjectOperator} />
+                            <Route path='/operator/project/:id' component={DataOperator} /> 
                             <Route path='/operator/list-galery/:id' exact component={ListGaleryOperator} />
+                            <Route path='/operator/upload' component={UploadOperator} />
                         </Switch>
                     </Container>
                 </RouterWeb>

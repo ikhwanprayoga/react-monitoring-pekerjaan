@@ -25,7 +25,7 @@ class Login extends React.Component {
         if (ress.status === 'success' && ress.level === 'superior') {
             this.props.history.push('/superior/data')
         } else if (ress.status === 'success' && ress.level === 'operator') {
-            this.props.history.push('/operator/data')
+            this.props.history.push('/operator/projects')
         } else {
             this.props.history.push('/login')
         }

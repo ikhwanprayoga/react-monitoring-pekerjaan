@@ -15,10 +15,11 @@ class CardData extends React.Component {
                         <img src={image} />
                   </div>
                   <div className="text">
-                        <h3>{title.length > 15 ? `${title.substr(0, 15)}...` : title}</h3>
+                        <h3>{title.length > 15 ? `${title.substr(0, 22)}...` : title}</h3>
                         <p>{description.length > 30 ? `${description.substr(0, 30)}...` : description}</p>
                         <p>{date}</p>
-                        <p>Ket: {isWork}</p>
+                        {isWork ? <p>Ket: {isWork}</p> : null}
+                        
                   </div>
             </div>
           );

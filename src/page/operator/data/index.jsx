@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import CardData from '../../../component/cardData'
-import { fetchAllActivities } from '../../../services/activity'
+import { fetchAllActivityProject } from '../../../services/project'
 import { dateIndo } from '../../../helpers/time'
 
 class Data extends React.Component {
@@ -18,7 +18,8 @@ class Data extends React.Component {
     }
 
     fetchList = async () => {
-        const ress = await fetchAllActivities()
+        const { id } = this.props.match.params
+        const ress = await fetchAllActivityProject(id)
         
         if (ress) {
             this.setState({
