@@ -1,7 +1,9 @@
 import React from 'react'
 import { BrowserRouter as RouterWeb, Route, Switch, Redirect } from 'react-router-dom'; 
 import Login from './page/Login';
+
 import DashboardSuperior from './page/superior/dashboard';
+import DataProjectSuperior from './page/superior/project';
 import DataSuperior from './page/superior/data';
 import ListGalerySuperior from './page/superior/data/list';
 
@@ -31,9 +33,9 @@ class Router extends React.Component {
                             </Route>
                             <Route path='/login' exact component={Login} />
                             <Route path='/superior/dashboard' exact component={DashboardSuperior} />
-                            <Route path='/superior/data' exact component={DataSuperior} />
+                            <Route path='/superior/project' exact component={DataProjectSuperior} />
+                            <Route path='/superior/project/:id' exact component={DataSuperior} />
                             <Route path='/superior/list-galery/:id' exact component={ListGalerySuperior} />
-
 
                             <Route path='/operator/projects' component={ProjectOperator} />
                             <Route path='/operator/project/:id' component={DataOperator} /> 

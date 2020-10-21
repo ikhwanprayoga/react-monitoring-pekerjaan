@@ -12,9 +12,9 @@ const tabs = [
   //   label: "Dashboard"
   // },
   {
-    route: "/superior/data",
+    route: "/superior/project",
     icon: faList,
-    label: "Data"
+    label: "Project"
   }
 ]
 
@@ -29,7 +29,7 @@ class LayoutSuperior extends React.Component {
                 {/* Top Bar*/}
                 <nav className="navbar navbar-expand-md navbar-light d-none d-lg-block sticky-top nav-warna" role="navigation">
                     <div className="container-fluid">
-                        <a className="navbar-brand" href="/home">Brand</a>
+                        <a className="navbar-brand" href="#"></a>
                         <Nav className="ml-auto">
                           {/* <NavItem>
                             <NavLink to="/superior/dashboard" className="nav-link">
@@ -37,8 +37,8 @@ class LayoutSuperior extends React.Component {
                             </NavLink>
                           </NavItem> */}
                           <NavItem>
-                            <NavLink to="/superior/data" className="nav-link">
-                              Data
+                            <NavLink to="/superior/project" className="nav-link">
+                              Project
                             </NavLink>
                           </NavItem>
                         </Nav>

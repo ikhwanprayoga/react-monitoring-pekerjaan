@@ -41,6 +41,7 @@ export async function postActivity(payload) {
   formData.append('title', payload.title)
   formData.append('description', payload.description)
   formData.append('date', payload.date)
+  formData.append('project_id', payload.projectId)
   formData.append('user_id', payload.userId)
   formData.append('is_work', payload.isWork)
 

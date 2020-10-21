@@ -2,10 +2,9 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import CardData from '../../../component/cardData'
-import { fetchAllActivityProject } from '../../../services/project'
-import { dateIndo } from '../../../helpers/time'
+import { fetchAllProjects } from '../../../services/project'
 
-class Data extends React.Component {
+class DataProjectSuperior extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,8 +17,7 @@ class Data extends React.Component {
     }
 
     fetchList = async () => {
-        const { id } = this.props.match.params
-        const ress = await fetchAllActivityProject(id)
+        const ress = await fetchAllProjects()
         
         if (ress) {
             this.setState({
@@ -34,23 +32,20 @@ class Data extends React.Component {
         return (
             <Container fluid className="mt-4">
                 <Row>
-                    {listProjects.length > 0 ? listProjects.map( d => (
-                        <Col md={3} className="mb-5">
-                            <Link to={`/superior/list-galery/${d.id}`} >
+                    {listProjects.map( d => (
+                        <Col md={4} className="mb-5">
+                            <Link to={`/superior/project/${d.id}`} >
                                 <CardData 
                                     title={d.title} 
                                     description={d.description} 
-                                    image={d.file ? `${process.env.REACT_APP_BASE_URL_FILES}/photos/${d.file}` : `${process.env.REACT_APP_BASE_URL_FILES}/images/no-image.png`}
-                                    date={dateIndo(d.date)}  
-                                    isWork={d.is_work === 'true' ? 'Bekerja' : 'Tidak Bekerja'}
                                 />
                             </Link>
                         </Col>
-                    )) : 'No Activity post'}
+                    ))}
                 </Row>
             </Container>
         );
     }
 }
  
-export default Data;
+export default DataProjectSuperior;

@@ -6,13 +6,9 @@ import { faUpload, faList } from '@fortawesome/free-solid-svg-icons';
 import './style.css'
 
 const tabs = [{
-    route: "/operator/upload",
-    icon: faUpload,
-    label: "Upload"
-  },{
-    route: "/operator/data",
+    route: "/operator/projects",
     icon: faList,
-    label: "Data"
+    label: "Project"
   }
 ]
 
@@ -27,16 +23,16 @@ class LayoutOperator extends React.Component {
                 {/* Top Bar*/}
                 <nav className="navbar navbar-expand-md navbar-light d-none d-lg-block sticky-top nav-warna" role="navigation">
                     <div className="container-fluid">
-                        <a className="navbar-brand" href="/home">Brand</a>
+                        <a className="navbar-brand" href="#"></a>
                         <Nav className="ml-auto">
-                          <NavItem>
+                          {/* <NavItem>
                             <NavLink to="/operator/upload" className="nav-link">
                               Upload
                             </NavLink>
-                          </NavItem>
+                          </NavItem> */}
                           <NavItem>
-                            <NavLink to="/operator/data" className="nav-link">
-                              Data
+                            <NavLink to="/operator/projects" className="nav-link">
+                              Project
                             </NavLink>
                           </NavItem>
                         </Nav>
