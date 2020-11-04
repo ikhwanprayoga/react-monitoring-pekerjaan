@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap'
+import { Container, Row, Col, Button, Modal, Form, Tabs, Tab, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import CardData from '../../../component/cardData'
 import { fetchAllActivityProject } from '../../../services/project'
@@ -11,6 +11,7 @@ class Data extends React.Component {
         super(props);
         this.state = {
             showModal: false,
+            showModalDocument: false,
             listActivities: [],
             form : {
                 userId: 2,
@@ -19,6 +20,13 @@ class Data extends React.Component {
                 date: '',
                 description: '',
                 isWork: true
+            },
+            formDocument : {
+                userId: 2,
+                projectId: this.props.match.params.id,
+                title: '',
+                description: '',
+                file: ''
             },
             files: ''
         }
@@ -84,6 +92,12 @@ class Data extends React.Component {
         })
     }
 
+    handleShowDocument = () => {
+        this.setState({
+            showModalDocument: true
+        })
+    }
+
     handleClose = () => {
         this.setState({
             showModal: false
@@ -96,26 +110,60 @@ class Data extends React.Component {
         return (
             <>
                 <Container fluid className="mt-4">
-                    <Row className="mb-3">
-                        <Col>
-                            <Button variant="primary" onClick={this.handleShow}>+ Upload Foto Pekerjaan</Button>
-                        </Col>
-                    </Row>
-                    <Row>
-                        {listActivities.map( d => (
-                            <Col md={3} className="mb-5">
-                                <Link to={`/operator/list-galery/${d.id}`} >
-                                    <CardData 
-                                        title={d.title} 
-                                        description={d.description} 
-                                        image={d.file ? `${process.env.REACT_APP_BASE_URL_FILES}/photos/${d.file}` : `${process.env.REACT_APP_BASE_URL_FILES}/images/no-image.png`}
-                                        date={dateIndo(d.date)}  
-                                        isWork={d.is_work === 'true' ? 'Bekerja' : 'Tidak Bekerja'}
-                                    />
-                                </Link>
-                            </Col>
-                        ))}
-                    </Row>
+                    <Tabs defaultActiveKey="foto" id="uncontrolled-tab-example">
+                        <Tab eventKey="foto" title="Foto">
+                            <Row className="mb-3 mt-3">
+                                <Col>
+                                    <Button variant="primary" onClick={this.handleShow}>+ Upload Foto Pekerjaan</Button>
+                                </Col>
+                            </Row>
+                            <Row>
+                                {listActivities.map( d => (
+                                    <Col md={3} className="mb-5">
+                                        <Link to={`/operator/list-galery/${d.id}`} >
+                                            <CardData 
+                                                title={d.title} 
+                                                description={d.description} 
+                                                image={d.file ? `${process.env.REACT_APP_BASE_URL_FILES}/photos/${d.file}` : `${process.env.REACT_APP_BASE_URL_FILES}/images/no-image.png`}
+                                                date={dateIndo(d.date)}  
+                                                isWork={d.is_work === 'true' ? 'Bekerja' : 'Tidak Bekerja'}
+                                            />
+                                        </Link>
+                                    </Col>
+                                ))}
+                            </Row>
+                        </Tab>
+                        <Tab eventKey="document" title="Dokumen">
+                            <Row className="mb-3 mt-3">
+                                <Col>
+                                    <Button variant="primary" onClick={this.handleShow}>+ Upload Dokumen</Button>
+                                </Col>
+                            </Row>
+                            <Row className="mb-3 mt-3">
+                                <Table striped bordered hover>
+                                  <thead>
+                                    <tr>
+                                      <th>No</th>
+                                      <th>Judul Dokumen</th>
+                                      <th>Aksi</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td>1</td>
+                                      <td>Mark</td>
+                                      <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                      <td>2</td>
+                                      <td>Jacob</td>
+                                      <td>@fat</td>
+                                    </tr>
+                                  </tbody>
+                                </Table>
+                            </Row>
+                        </Tab>
+                    </Tabs>
                 </Container>
                 <Modal show={showModal} onHide={this.handleClose}>
                     <Modal.Header closeButton>
@@ -145,6 +193,35 @@ class Data extends React.Component {
                             <Form.Group>
                                 <Form.Label>Foto Pekerjaan</Form.Label>
                                 <Form.Control type="file" name="files" onChange={this.handleChangeFiles} multiple placeholder="Masukan foto pekerjaan" />
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={this.submitData}>
+                            Submit
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={showModal} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Upload Foto Pekerjaan</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group>
+                                <Form.Label>Judul Dokumen</Form.Label>
+                                <Form.Control type="text" name="title" value={form.title} onChange={this.handleChangeForm} placeholder="Masukan judul pekerjaan" />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Deskripsi Pekerjaan</Form.Label>
+                                <Form.Control type="text" name="description" value={form.description} onChange={this.handleChangeForm} placeholder="Masukan deskripsi pekerjaan" />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Foto Pekerjaan</Form.Label>
+                                <Form.Control type="file" name="files" onChange={this.handleChangeFiles} placeholder="Masukan foto pekerjaan" />
                             </Form.Group>
                         </Form>
                     </Modal.Body>
