@@ -24,7 +24,6 @@ export async function postDocument(payload) {
   formData.append('description', payload.description)
   formData.append('project_id', payload.projectId)
   formData.append('user_id', payload.userId)
-
   try {
     const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/document`,
       formData,
@@ -32,11 +31,24 @@ export async function postDocument(payload) {
     )
     
     Notification.success("Data berhasil disubmit", 'Sukses')
-    return res.data
+    return res
   } catch (error) {
-    console.log('err', error.response)
+    console.log('err', error)
 
-    Notification.error(error.response.data.errors.message || error.response.status, 'Gagal memuat data')
+    // Notification.error(error.response.data.errors.message || error.response.status, 'Gagal memuat data')
+    return false
+  }
+}
+
+export async function destroyDocument(id) {
+  try {
+    const res = await axios.delete(`${process.env.REACT_APP_BASE_URL}/document/${id}`,
+      { ...AuthHeader() },
+    )
+    Notification.success("Data berhasil dihapus", 'Sukses')
+    return res
+  } catch (error) {
+    console.log('errr', error)
     return false
   }
 }

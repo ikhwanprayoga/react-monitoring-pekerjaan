@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import CardData from '../../../component/cardData'
 import { fetchAllActivityProject } from '../../../services/project'
 import { postActivity } from '../../../services/activity'
-import { fetchAllDocuments, postDocument } from '../../../services/document'
+import { fetchAllDocuments, postDocument, destroyDocument } from '../../../services/document'
 import { dateIndo } from '../../../helpers/time'
 
 class Data extends React.Component {
@@ -53,7 +53,6 @@ class Data extends React.Component {
     fetchListDocuments = async () => {
         const { id } = this.props.match.params
         const ress = await fetchAllDocuments(id)
-        console.log('ress docuemnt', ress)
         if (ress) {
             this.setState({
                 listDocuments: ress.data
@@ -85,8 +84,29 @@ class Data extends React.Component {
         this.fetchList()
     }
 
-    submitDataDocument = () => {
+    submitDataDocument = async () => {
+        const { formDocument } = this.state
+        const ress = await postDocument(formDocument)
+        if (ress) {
+            this.setState({
+                formDocument : {
+                    userId: 2,
+                    projectId: this.props.match.params.id,
+                    title: '',
+                    description: '',
+                    file: ''
+                },
+                showModalDocument: false
+            })
+        }
+        this.fetchListDocuments()
+    }
 
+    destroyDocument = async (id) => {
+        const ress = await destroyDocument(id)
+        if (ress) {
+            this.fetchListDocuments()
+        }
     }
 
     handleChangeForm = event => {
@@ -100,8 +120,12 @@ class Data extends React.Component {
 
     handleChangeFormDocument = e => {
         let dataFormNew = { ...this.state.formDocument }
-        dataFormNew[e.target.name] = e.target.value
-  
+        if (e.target.name === 'file') {
+            dataFormNew[e.target.name] = e.target.files[0]
+        } else {
+            dataFormNew[e.target.name] = e.target.value
+        }
+
         this.setState({
             formDocument: dataFormNew
         })
@@ -111,6 +135,18 @@ class Data extends React.Component {
         this.setState({ 
           files: e.target.files
         })
+    }
+
+    viewDocument = file => {
+        const path = `${process.env.REACT_APP_BASE_PATH_URL}/${file}`
+        window.open(path, "_blank")
+    }
+
+    handleDestroyDocument = id => {
+        const c = window.confirm("Apakah anda ingin menghapus dokumen ini?")
+        if (c === true) {
+            this.destroyDocument(id)
+        }
     }
 
     handleShow = () => {
@@ -182,8 +218,8 @@ class Data extends React.Component {
                                             <td>{r.title}</td>
                                             <td>{r.file}</td>
                                             <td>
-                                                <Button className="mr-2" variant="primary">Lihat Dokumen</Button>
-                                                <Button variant="danger">Hapus</Button>
+                                                <Button className="mr-2" variant="primary" onClick={()=>this.viewDocument(r.file)}>Lihat Dokumen</Button>
+                                                <Button variant="danger" onClick={()=>this.handleDestroyDocument(r.id)}>Hapus</Button>
                                             </td>
                                         </tr>
                                     ))}
@@ -241,7 +277,7 @@ class Data extends React.Component {
                         <Form>
                             <Form.Group>
                                 <Form.Label>Judul Dokumen</Form.Label>
-                                <Form.Control type="text" name="title" value={formDocument.title} onChange={this.handleChangeFormDocument} placeholder="Masukan judul dokumen pekerjaan" />
+                                <Form.Control type="text" name="title" value={formDocument.title} onChange={this.handleChangeFormDocument} placeholder="Masukan judul dokumen pekerjaan" required />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Deskripsi Pekerjaan</Form.Label>
