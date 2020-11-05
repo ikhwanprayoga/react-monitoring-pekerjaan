@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import CardData from '../../../component/cardData'
 import { fetchAllActivityProject } from '../../../services/project'
 import { postActivity } from '../../../services/activity'
+import { fetchAllDocuments, postDocument } from '../../../services/document'
 import { dateIndo } from '../../../helpers/time'
 
 class Data extends React.Component {
@@ -13,6 +14,7 @@ class Data extends React.Component {
             showModal: false,
             showModalDocument: false,
             listActivities: [],
+            listDocuments: [],
             form : {
                 userId: 2,
                 projectId: this.props.match.params.id,
@@ -34,6 +36,7 @@ class Data extends React.Component {
 
     componentDidMount() {
         this.fetchList()
+        this.fetchListDocuments()
     }
 
     fetchList = async () => {
@@ -43,6 +46,17 @@ class Data extends React.Component {
         if (ress) {
             this.setState({
                 listActivities: ress.data
+            })
+        }
+    }
+
+    fetchListDocuments = async () => {
+        const { id } = this.props.match.params
+        const ress = await fetchAllDocuments(id)
+        console.log('ress docuemnt', ress)
+        if (ress) {
+            this.setState({
+                listDocuments: ress.data
             })
         }
     }
@@ -71,12 +85,25 @@ class Data extends React.Component {
         this.fetchList()
     }
 
+    submitDataDocument = () => {
+
+    }
+
     handleChangeForm = event => {
         let dataFormNew = { ...this.state.form }
         dataFormNew[event.target.name] = event.target.value
   
         this.setState({
           form: dataFormNew
+        })
+    }
+
+    handleChangeFormDocument = e => {
+        let dataFormNew = { ...this.state.formDocument }
+        dataFormNew[e.target.name] = e.target.value
+  
+        this.setState({
+            formDocument: dataFormNew
         })
     }
 
@@ -100,12 +127,13 @@ class Data extends React.Component {
 
     handleClose = () => {
         this.setState({
-            showModal: false
+            showModal: false,
+            showModalDocument: false,
         })
     }
 
     render() { 
-        const { listActivities, showModal, form } = this.state
+        const { listActivities, showModal, form, showModalDocument, formDocument, listDocuments } = this.state
         
         return (
             <>
@@ -136,29 +164,29 @@ class Data extends React.Component {
                         <Tab eventKey="document" title="Dokumen">
                             <Row className="mb-3 mt-3">
                                 <Col>
-                                    <Button variant="primary" onClick={this.handleShow}>+ Upload Dokumen</Button>
+                                    <Button variant="primary" onClick={this.handleShowDocument}>+ Upload Dokumen</Button>
                                 </Col>
                             </Row>
                             <Row className="mb-3 mt-3">
                                 <Table striped bordered hover>
                                   <thead>
                                     <tr>
-                                      <th>No</th>
                                       <th>Judul Dokumen</th>
+                                      <th>Dokumen</th>
                                       <th>Aksi</th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <td>1</td>
-                                      <td>Mark</td>
-                                      <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                      <td>2</td>
-                                      <td>Jacob</td>
-                                      <td>@fat</td>
-                                    </tr>
+                                    {listDocuments.map(r => (
+                                        <tr>
+                                            <td>{r.title}</td>
+                                            <td>{r.file}</td>
+                                            <td>
+                                                <Button className="mr-2" variant="primary">Lihat Dokumen</Button>
+                                                <Button variant="danger">Hapus</Button>
+                                            </td>
+                                        </tr>
+                                    ))}
                                   </tbody>
                                 </Table>
                             </Row>
@@ -205,23 +233,23 @@ class Data extends React.Component {
                         </Button>
                     </Modal.Footer>
                 </Modal>
-                <Modal show={showModal} onHide={this.handleClose}>
+                <Modal show={showModalDocument} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Upload Foto Pekerjaan</Modal.Title>
+                        <Modal.Title>Upload Dokumen Pekerjaan</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
                             <Form.Group>
                                 <Form.Label>Judul Dokumen</Form.Label>
-                                <Form.Control type="text" name="title" value={form.title} onChange={this.handleChangeForm} placeholder="Masukan judul pekerjaan" />
+                                <Form.Control type="text" name="title" value={formDocument.title} onChange={this.handleChangeFormDocument} placeholder="Masukan judul dokumen pekerjaan" />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Deskripsi Pekerjaan</Form.Label>
-                                <Form.Control type="text" name="description" value={form.description} onChange={this.handleChangeForm} placeholder="Masukan deskripsi pekerjaan" />
+                                <Form.Control type="text" name="description" value={formDocument.description} onChange={this.handleChangeFormDocument} placeholder="Masukan deskripsi dokumen pekerjaan" />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Foto Pekerjaan</Form.Label>
-                                <Form.Control type="file" name="files" onChange={this.handleChangeFiles} placeholder="Masukan foto pekerjaan" />
+                                <Form.Control type="file" name="file" onChange={this.handleChangeFormDocument} placeholder="Masukan file dokumen pekerjaan" />
                             </Form.Group>
                         </Form>
                     </Modal.Body>
@@ -229,7 +257,7 @@ class Data extends React.Component {
                         <Button variant="secondary" onClick={this.handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={this.submitData}>
+                        <Button variant="primary" onClick={this.submitDataDocument}>
                             Submit
                         </Button>
                     </Modal.Footer>
