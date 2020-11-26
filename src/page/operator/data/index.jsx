@@ -1,6 +1,7 @@
 import React from 'react'
-import { Container, Row, Col, Button, Modal, Form, Tabs, Tab, Table } from 'react-bootstrap'
+import { Container, Row, Col, Button, Modal, Form, Tabs, Tab, Table, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import { NotificationManager } from 'react-notifications';
 import CardData from '../../../component/cardData'
 import { fetchAllActivityProject } from '../../../services/project'
 import { postActivity } from '../../../services/activity'
@@ -11,6 +12,8 @@ class Data extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isUploadPhotos: false,
+            isUploadDocuments: false,
             showModal: false,
             showModalDocument: false,
             listActivities: [],
@@ -65,6 +68,10 @@ class Data extends React.Component {
         const formNew = {
           ...form, files
         }
+
+        this.setState({
+            isUploadPhotos: true
+        })
         
         const ress = await postActivity(formNew)
         
@@ -78,14 +85,23 @@ class Data extends React.Component {
               isWork: true
             },
             files: '',
-            showModal: false
+            showModal: false,
+            isUploadPhotos: false
           })
+        } else {
+            this.setState({
+                isUploadPhotos: false
+            })
+            Notification.error('Data gagal diupload', 'Error')
         }
         this.fetchList()
     }
 
     submitDataDocument = async () => {
         const { formDocument } = this.state
+        this.setState({
+            isUploadDocuments: true
+        })
         const ress = await postDocument(formDocument)
         if (ress) {
             this.setState({
@@ -96,8 +112,14 @@ class Data extends React.Component {
                     description: '',
                     file: ''
                 },
-                showModalDocument: false
+                showModalDocument: false,
+                isUploadDocuments: false
             })
+        } else {
+            this.setState({
+                isUploadDocuments: false
+            })
+            Notification.error('Data gagal diupload', 'Error')
         }
         this.fetchListDocuments()
     }
@@ -169,7 +191,7 @@ class Data extends React.Component {
     }
 
     render() { 
-        const { listActivities, showModal, form, showModalDocument, formDocument, listDocuments } = this.state
+        const { listActivities, showModal, form, showModalDocument, formDocument, listDocuments, isUploadPhotos, isUploadDocuments } = this.state
         
         return (
             <>
@@ -265,7 +287,16 @@ class Data extends React.Component {
                             Close
                         </Button>
                         <Button variant="primary" onClick={this.submitData}>
-                            Submit
+                            {isUploadPhotos ? 
+                            <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
+                            />
+                            : null}
+                            Upload
                         </Button>
                     </Modal.Footer>
                 </Modal>
@@ -294,7 +325,16 @@ class Data extends React.Component {
                             Close
                         </Button>
                         <Button variant="primary" onClick={this.submitDataDocument}>
-                            Submit
+                            {isUploadDocuments ? 
+                            <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
+                            />
+                            : null}
+                            Upload
                         </Button>
                     </Modal.Footer>
                 </Modal>
